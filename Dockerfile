@@ -12,12 +12,12 @@ RUN sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-AppStream.repo \
 #COPY *IMAGE_ROOT/ /
 
 RUN set -x \
- && update-ca-trust \
- && dnf install -y epel-release \
- && dnf install -y dnf-plugins-core \
- && dnf config-manager -y --set-enabled powertools \
- && dnf -y makecache \
- && dnf -y install \
+ && sudo update-ca-trust \
+ && sudo dnf install -y epel-release \
+ && sudo dnf install -y dnf-plugins-core \
+ && sudo dnf config-manager -y --set-enabled powertools \
+ && sudo dnf -y makecache \
+ && sudo dnf -y install \
     alsa-lib-devel \
     asciidoc \
     autoconf \
@@ -101,23 +101,23 @@ RUN set -x \
     xz \
     zlib-devel \
 #RPM package builder and dependencies
- && pip2 install SQLObject \
+ && sudo pip2 install SQLObject \
  && wget https://github.com/genereese/togo/releases/download/v2.5r1/togo-2.5-1.noarch.rpm \
- && rpm2cpio ./togo-2.5-1.noarch.rpm | cpio -idmv \
+ && rpm2cpio ./togo-2.5-1.noarch.rpm | sudo cpio -idmv \
 # dockbook
- && ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi && \ \
+ && sudo ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi && \ \
 # No need for this because the accupara rockylinux image already has 2.47.1
 #git clone https://git.kernel.org/pub/scm/git/git.git --branch v2.28.0 --single-branch && \
 #cd ./git && make all doc prefix=/usr && make install install-doc install-html install-man prefix=/usr
 # needed to overide default link
- && alternatives --set python3 /usr/bin/python3.8 \
+ && sudo alternatives --set python3 /usr/bin/python3.8 \
 # needed to set default
- && alternatives --set python /usr/bin/python3 \
+ && sudo alternatives --set python /usr/bin/python3 \
 # install python38 pip modules
- && pip3.8 install requests \
+ && sudo pip3.8 install requests \
 # Install repo tool for some bsp case, like NXP's yocto
- && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > /usr/bin/repo \
- && chmod a+x /usr/bin/repo
+ && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo | sudo tee /usr/bin/repo \
+ && sudo chmod a+x /usr/bin/repo
 
 # Set the locale, else yocto will complain
 ENV LANG en_US.UTF-8 \
