@@ -104,7 +104,7 @@ RUN set -x \
  && wget https://github.com/genereese/togo/releases/download/v2.5r1/togo-2.5-1.noarch.rpm \
  && rpm2cpio ./togo-2.5-1.noarch.rpm | sudo cpio -idmv \
 # dockbook
- && sudo ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi && \ \
+ && sudo ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi \
 # No need for this because the accupara rockylinux image already has 2.47.1
 #git clone https://git.kernel.org/pub/scm/git/git.git --branch v2.28.0 --single-branch && \
 #cd ./git && make all doc prefix=/usr && make install install-doc install-html install-man prefix=/usr
