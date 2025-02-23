@@ -3,15 +3,14 @@ FROM accupara/rockylinux:8
 # Install package prereqs for windriver LTS'19
 #  Note: "https://docs.windriver.com/bundle/Wind_River_Linux_Release_Notes_LTS_19_tki1589820771450/page/vtn1593622477138.html"
 
-RUN sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-AppStream.repo \
-    && sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-PowerTools.repo \
-    && sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-Extras.repo \
-    && sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-BaseOS.repo \
-    && sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-Plus.repo
-
 #COPY *IMAGE_ROOT/ /
 
 RUN set -x \
+ && sudo sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-AppStream.repo \
+ && sudo sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-PowerTools.repo \
+ && sudo sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-Extras.repo \
+ && sudo sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-BaseOS.repo \
+ && sudo sed -i 's/#baseurl/baseurl/g' /etc/yum.repos.d/Rocky-Plus.repo \
  && sudo update-ca-trust \
  && sudo dnf install -y epel-release \
  && sudo dnf install -y dnf-plugins-core \
