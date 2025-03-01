@@ -1,4 +1,4 @@
-IMG_NAME=ves
+IMG_NAME=accupara/ves
 IMG_TAG=dobos
 
 build:
